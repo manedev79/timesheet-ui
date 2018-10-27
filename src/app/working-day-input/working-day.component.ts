@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { WorkingDayService } from '../services/workingday.service';
-import { WorkingDay } from '../model/workingday.model';
+import { WorkingDayService } from '../services/working-day.service';
+import { WorkingDay } from '../model/working-day.model';
 
 @Component({
   selector: 'app-workingday-input',

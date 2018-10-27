@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { WorkingDay } from '../model/workingday.model';
+import { WorkingDay } from '../model/working-day.model';
 
 @Injectable()
 export class WorkingDayService {
