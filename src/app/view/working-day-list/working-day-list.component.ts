@@ -1,16 +1,19 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild, Input, OnChanges, SimpleChanges, AfterViewInit} from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid-community';
-import { WorkingDay } from '../../model/working-day.model';
+import { WorkingDaySummary } from '../../model/working-day-summary.model';
 
 @Component({
   selector: 'app-workingday-list',
   templateUrl: './working-day-list.component.html',
   styleUrls: ['./working-day-list.component.scss']
 })
-export class WorkingDayListComponent {
+export class WorkingDayListComponent implements OnChanges, AfterViewInit {
   @ViewChild('grid')
-  grid: AgGridNg2;
+  private grid: AgGridNg2;
+
+  @Input()
+  rowData: WorkingDaySummary[] = [];
 
   gridOptions = <GridOptions>{
     enableColResize: true, // columns can be resized
@@ -40,21 +43,35 @@ export class WorkingDayListComponent {
       maxWidth: 100
     },
     {
-      headerName: 'Pausen',
-      field: 'break',
-      maxWidth: 100
+      headerName: 'Arbeitszeit',
+      field: 'workSum',
+      maxWidth: 130
     },
+    {
+      headerName: 'Pausensumme',
+      field: 'breakSum',
+      maxWidth: 130
+    },
+    {
+      headerName: 'Beschreibung',
+      field: 'description'
+    }
   ];
 
-  rowData = <WorkingDay[]>[
-      { day: '01.01.2018', start: '09:00', end: '18:00' },
-      { day: '02.01.2018', start: '09:30', end: '17:30' },
-      { day: '03.01.2018', start: '10:00', end: '17:00' },
-  ];
+  ngAfterViewInit() {
+    this.fitGridToSize();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.rowData) {
+      this.fitGridToSize();
+    }
+  }
 
   private fitGridToSize() {
-    if (this.grid) {
+    if (this.grid && this.grid.api) {
       this.grid.api.sizeColumnsToFit();
     }
   }
+
 }

@@ -17,7 +17,7 @@ import { Break } from '../../model/break.model';
 export class BreakInputComponent implements ControlValueAccessor {
   start: string;
   end: string;
-  duration: number;
+  duration: string;
 
   propagateChange = (_: any) => {};
 

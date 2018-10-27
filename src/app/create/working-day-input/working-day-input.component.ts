@@ -43,7 +43,7 @@ export class WorkingDayInputComponent implements AfterViewInit {
     this.workingDayService
       .saveWorkingDay(workingDay)
       .subscribe(
-        () => { alert('SAVED!'); },
+        (result: WorkingDay) => { alert('SAVED!' + result); },
         err => { alert('ERROR' + err); }
       );
   }
