@@ -4,12 +4,12 @@ import { registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
 import localeDe from '@angular/common/locales/de';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkingDayInputComponent } from './working_day-input/working_day.component';
 import { BreakInputComponent } from './break-input/break-input.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(localeDe, 'de');
 
@@ -24,7 +24,8 @@ registerLocaleData(localeDe, 'de');
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' }
