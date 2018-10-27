@@ -37,7 +37,7 @@ export class WorkingDayInputComponent implements AfterViewInit {
       day,
       start,
       end,
-      breaks
+      breaks: [breaks] // TODO currently workaround to statisfy the backend
     };
 
     this.workingDayService
