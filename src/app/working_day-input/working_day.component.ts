@@ -1,5 +1,8 @@
 import { Component, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { WorkingDayService } from '../services/workingday.service';
+import { WorkingDay } from '../model/workingday.model';
+import { DayModel } from '@clr/angular/forms/datepicker/model/day.model';
 
 @Component({
   selector: 'app-workingday-input',
@@ -13,11 +16,12 @@ export class WorkingDayInputComponent implements AfterViewInit {
   @ViewChild('select', { read: ViewContainerRef })
   private select: ViewContainerRef;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private workingDayService: WorkingDayService) {
     this.form = fb.group({
       'workingday': fb.control(''),
       'start': fb.control(''),
-      'end': fb.control('')
+      'end': fb.control(''),
+      'breaks': fb.control('')
     });
   }
 
@@ -27,8 +31,21 @@ export class WorkingDayInputComponent implements AfterViewInit {
     });
   }
 
-  onSubmit() {
-    console.log('submit', this.form.value);
+  submit() {
+    const { day, start, end, breaks } = this.form.value;
+    const workingDay = <WorkingDay> {
+      day,
+      start,
+      end,
+      breaks
+    };
+
+    this.workingDayService
+      .saveWorkingDay(workingDay)
+      .subscribe(
+        () => { alert('SAVED!'); },
+        err => { alert('ERROR' + err); }
+      );
   }
 
 

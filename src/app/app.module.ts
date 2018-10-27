@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkingDayInputComponent } from './working_day-input/working_day.component';
 import { BreakInputComponent } from './break-input/break-input.component';
+import { WorkingDayService } from './services/workingday.service';
 
 registerLocaleData(localeDe, 'de');
 
@@ -28,7 +29,8 @@ registerLocaleData(localeDe, 'de');
     FormsModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'de' }
+    { provide: LOCALE_ID, useValue: 'de' },
+    WorkingDayService
   ],
   bootstrap: [AppComponent]
 })

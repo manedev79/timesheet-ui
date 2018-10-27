@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Break } from './break.model';
+import { Break } from '../model/break.model';
 
 @Component({
   selector: 'app-break-input',
@@ -22,7 +22,6 @@ export class BreakInputComponent implements ControlValueAccessor {
   propagateChange = (_: any) => {};
 
   onAnyChange(event): void {
-    console.log('onAnyChange', event);
     this.propagateChange({
       start: this.start,
       end: this.end,
@@ -31,7 +30,7 @@ export class BreakInputComponent implements ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    // TODO currently empty
+    // TODO currently we only read data
   }
 
   registerOnChange(fn: any): void {
@@ -39,6 +38,5 @@ export class BreakInputComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {}
-
 
 }
