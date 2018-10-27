@@ -21,12 +21,14 @@
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
     "@clr/angular": "^0.13.7",
+    "@clr/icons": "^0.13.7",
+    "@clr/ui": "^0.13.7",
+    "@webcomponents/custom-elements": "^1.0.0",
+    "ag-grid-angular": "^19.0.0",
+    "ag-grid-community": "^19.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
-    "zone.js": "~0.8.26",
-    "@clr/ui": "^0.13.7",
-    "@clr/icons": "^0.13.7",
-    "@webcomponents/custom-elements": "^1.0.0"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",

@@ -6,12 +6,14 @@ import { ClarityModule } from '@clr/angular';
 import localeDe from '@angular/common/locales/de';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkingDayInputComponent } from './working-day-input/working-day.component';
 import { BreakInputComponent } from './break-input/break-input.component';
 import { WorkingDayService } from './services/working-day.service';
+import { WorkingDayListComponent } from './working-day-list/working-day-list.component';
 
 registerLocaleData(localeDe, 'de');
 
@@ -19,7 +21,8 @@ registerLocaleData(localeDe, 'de');
   declarations: [
     AppComponent,
     WorkingDayInputComponent,
-    BreakInputComponent
+    BreakInputComponent,
+    WorkingDayListComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ registerLocaleData(localeDe, 'de');
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule.withComponents([])
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
