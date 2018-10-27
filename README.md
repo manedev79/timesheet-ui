@@ -1,2 +1,14 @@
-# timesheet-ui
-UI for timesheet
+# Timesheet
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## TODOs
+- Dynamic Language support
+
+
+## Further links
+- https://material.angular.io/
+- https://getbootstrap.com/
+- https://vmware.github.io/clarity/

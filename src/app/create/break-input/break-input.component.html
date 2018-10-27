@@ -1,0 +1,30 @@
+
+<div class="break-input-wrapper">
+  <input
+    placeholder="Von"
+    class="input-small"
+    type="time"
+    clrInput
+    [(ngModel)]="start"
+    (input)="onAnyChange($event)"
+  />
+  <span>-</span>
+  <input
+    placeholder="Bis"
+    class="input-small"
+    type="time"
+    clrInput
+    [(ngModel)]="end"
+    (input)="onAnyChange($event)"
+  />
+  <span>/</span>
+  <input
+    placeholder=""
+    class="input-small"
+    type="number"
+    clrInput
+    [(ngModel)]="duration"
+    (input)="onAnyChange($event)"
+  />
+  <span>Min</span>
+</div>
