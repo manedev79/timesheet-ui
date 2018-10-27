@@ -1,13 +1,12 @@
 import { Component, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { WorkingDayService } from '../services/workingday.service';
-import { WorkingDay } from '../model/workingday.model';
-import { DayModel } from '@clr/angular/forms/datepicker/model/day.model';
+import { WorkingDayService } from '../services/working-day.service';
+import { WorkingDay } from '../model/working-day.model';
 
 @Component({
   selector: 'app-workingday-input',
-  templateUrl: './working_day.component.html',
-  styleUrls: ['./working_day.component.scss']
+  templateUrl: './working-day.component.html',
+  styleUrls: ['./working-day.component.scss']
 })
 export class WorkingDayInputComponent implements AfterViewInit {
 
@@ -37,7 +36,7 @@ export class WorkingDayInputComponent implements AfterViewInit {
       day,
       start,
       end,
-      breaks
+      breaks: [breaks] // TODO currently workaround to statisfy the backend
     };
 
     this.workingDayService
