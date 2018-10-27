@@ -6,14 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Hello';
-
-  changeTitle() {
-    this.title = 'Hello World';
-  }
-
-  changeTitle2(event) {
-    this.title = event;
-  }
 
 }

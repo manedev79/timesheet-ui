@@ -10,10 +10,13 @@ import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WorkingDayInputComponent } from './working-day-input/working-day.component';
-import { BreakInputComponent } from './break-input/break-input.component';
+import { WorkingDayInputComponent } from './create/working-day-input/working-day-input.component';
+import { BreakInputComponent } from './create/break-input/break-input.component';
 import { WorkingDayService } from './services/working-day.service';
-import { WorkingDayListComponent } from './working-day-list/working-day-list.component';
+import { WorkingDayListComponent } from './view/working-day-list/working-day-list.component';
+import { ViewPageComponent } from './view/view-page/view-page.component';
+import { CreatePageComponent } from './create/create-page/create.component';
+import { HeaderComponent } from './header/header.component';
 
 registerLocaleData(localeDe, 'de');
 
@@ -22,7 +25,10 @@ registerLocaleData(localeDe, 'de');
     AppComponent,
     WorkingDayInputComponent,
     BreakInputComponent,
-    WorkingDayListComponent
+    WorkingDayListComponent,
+    ViewPageComponent,
+    CreatePageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

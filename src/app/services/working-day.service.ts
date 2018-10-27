@@ -10,6 +10,11 @@ export class WorkingDayService {
 
   constructor(private http: HttpClient) {}
 
+  getWorkingDays(): Observable<WorkingDay[]> {
+    const url = `${environment.baseUrl}/workingdays`;
+    return this.http.get<WorkingDay[]>(url);
+  }
+
   getWorkingDay(workingDayId: number): Observable<WorkingDay> {
     const url = `${environment.baseUrl}/workingdays/${workingDayId}`;
     return this.http.get<WorkingDay>(url);

@@ -1,7 +1,7 @@
 import { Component, ViewChild} from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid-community';
-import { WorkingDay } from '../model/working-day.model';
+import { WorkingDay } from '../../model/working-day.model';
 
 @Component({
   selector: 'app-workingday-list',
