@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WorkingDayInputComponent } from './working_day-input/working_day.component';
+import { WorkingDayInputComponent } from './working-day-input/working-day.component';
 import { BreakInputComponent } from './break-input/break-input.component';
 import { WorkingDayService } from './services/workingday.service';
 
