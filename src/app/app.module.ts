@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkingDayInputComponent } from './working-day-input/working-day.component';
 import { BreakInputComponent } from './break-input/break-input.component';
-import { WorkingDayService } from './services/workingday.service';
+import { WorkingDayService } from './services/working-day.service';
 
 registerLocaleData(localeDe, 'de');
 
