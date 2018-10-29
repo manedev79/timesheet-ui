@@ -1,6 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Break } from '../../model/break.model';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-break-input',
@@ -17,16 +18,29 @@ import { Break } from '../../model/break.model';
 export class BreakInputComponent implements ControlValueAccessor {
   start: string;
   end: string;
-  duration: string;
+  durationInMin: number;
 
   propagateChange = (_: any) => {};
 
   onAnyChange(event): void {
-    this.propagateChange({
+    this.notifyAboutCurrentValues();
+  }
+
+  notifyAboutCurrentValues() {
+    let result = {
       start: this.start,
       end: this.end,
-      duration: this.duration
-    } as Break);
+      duration: null
+    };
+
+    if (this.durationInMin) {
+      result = {
+        ...result,
+        duration: moment.duration(`PT${this.durationInMin}M`).toISOString()
+      };
+    }
+
+    this.propagateChange(result);
   }
 
   writeValue(obj: any): void {
@@ -38,5 +52,4 @@ export class BreakInputComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {}
-
 }

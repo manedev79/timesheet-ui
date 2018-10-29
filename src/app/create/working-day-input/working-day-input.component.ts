@@ -4,6 +4,7 @@ import * as moment from 'moment';
 
 import { WorkingDayService } from '../../services/working-day.service';
 import { WorkingDay } from '../../model/working-day.model';
+import { Break } from 'src/app/model/break.model';
 
 @Component({
   selector: 'app-workingday-input',
@@ -24,8 +25,6 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
   }
 
   initalizeFields() {
-    console.log('this.workingDay', this.workingDay);
-
     const day = this.workingDay ? this.formatDate(moment(this.workingDay.day, 'YYYY-MM-DD')) : this.formatDate(moment());
     const start = this.workingDay ? this.formatTime(moment(this.workingDay.start)) : '';
     const end = this.workingDay ? this.formatTime(moment(this.workingDay.end)) : '';
@@ -58,7 +57,7 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
       day: this.parseDate(day).toISOString(),
       start: null,
       end: null,
-      breaks: [] // TODO currently workaround to statisfy the backend
+      breaks: []
     };
 
     // Start set?
@@ -77,6 +76,14 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
       };
     }
 
+    // Breaks given
+    if (breaks) {
+      workingDay = {
+        ...workingDay,
+        breaks: this.convertBreaks(day, breaks)
+      };
+    }
+
     // TODO handle breaks
 
     console.log('Sending workingDay', workingDay);
@@ -89,6 +96,17 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
           throw err;
          }
       );
+  }
+
+  private convertBreaks(day: string, breaks): Break[] {
+    // TODO Currently only one break is supported
+    const breakModel = <Break> {
+      start: this.buildMoment(day, breaks.start).toISOString(),
+      end: this.buildMoment(day, breaks.end).toISOString(),
+      duration: breaks.duration as string
+    };
+
+    return [breakModel];
   }
 
   private parseDate(date: string): moment.Moment {
