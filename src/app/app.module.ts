@@ -17,6 +17,8 @@ import { WorkingDayListComponent } from './view/working-day-list/working-day-lis
 import { ViewPageComponent } from './view/view-page/view-page.component';
 import { CreatePageComponent } from './create/create-page/create.component';
 import { HeaderComponent } from './header/header.component';
+import { EditPageComponent } from './edit/edit-page/edit-page.component';
+import { WorkingDayResolver } from './edit/workingday-resolver/workingday.resolver';
 
 registerLocaleData(localeDe, 'de');
 
@@ -28,7 +30,8 @@ registerLocaleData(localeDe, 'de');
     WorkingDayListComponent,
     ViewPageComponent,
     CreatePageComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditPageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ registerLocaleData(localeDe, 'de');
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
-    WorkingDayService
+    WorkingDayService,
+    WorkingDayResolver
   ],
   bootstrap: [AppComponent]
 })

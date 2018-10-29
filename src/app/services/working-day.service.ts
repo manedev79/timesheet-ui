@@ -23,7 +23,12 @@ export class WorkingDayService {
 
   saveWorkingDay(workingDay: WorkingDay): Observable<WorkingDay> {
     const url = `${environment.baseUrl}/workingdays/`;
-    return this.http.post<WorkingDay>(url, workingDay);
+
+    if (workingDay.id) {
+      return this.http.put<WorkingDay>(url, workingDay);
+    } else {
+      return this.http.post<WorkingDay>(url, workingDay);
+    }
   }
 
   getWorkingDayByDay(year: number, month: number, day: number): Observable<WorkingDay> {
