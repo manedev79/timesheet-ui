@@ -19,7 +19,9 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
   @ViewChild('select', { read: ViewContainerRef })
   private select: ViewContainerRef;
 
-  constructor(private fb: FormBuilder, private workingDayService: WorkingDayService) {}
+  constructor(private fb: FormBuilder, private workingDayService: WorkingDayService) {
+    this.initalizeFields();
+  }
 
   initalizeFields() {
     console.log('this.workingDay', this.workingDay);

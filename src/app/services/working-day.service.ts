@@ -36,8 +36,8 @@ export class WorkingDayService {
     const url = `${environment.baseUrl}/workingdays/`;
 
     const momDay = moment().set({
-      year: year,
-      month: month - 1,
+      year,
+      month,
       date: day
     }).utc(true);
 
