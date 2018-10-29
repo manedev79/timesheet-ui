@@ -4,6 +4,7 @@ import { Observable, empty } from 'rxjs';
 import { WorkingDay } from '../../model/working-day.model';
 import { WorkingDayService } from '../../services/working-day.service';
 
+
 @Injectable()
 export class WorkingDayResolver implements Resolve<Observable<WorkingDay>> {
 
@@ -14,7 +15,9 @@ export class WorkingDayResolver implements Resolve<Observable<WorkingDay>> {
     state: RouterStateSnapshot): Observable<WorkingDay> {
       console.log('resolve', route, state);
 
+      // TODO Change to MOMENT
       const date = new Date(route.params['date']);
+
       if (this.isValidDate(date)) {
         return this.workingDayService.getWorkingDayByDay(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate());
       } else {

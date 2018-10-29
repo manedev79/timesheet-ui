@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WorkingDay } from 'src/app/model/working-day.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-page',
@@ -8,12 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditPageComponent {
 
-  constructor(private route: ActivatedRoute) {
-    console.log('route', route);
+  workingDay: WorkingDay = null;
 
-    this.route.data.subscribe(
-      (data2) => console.log('data2', data2)
-    );
+  constructor(private route: ActivatedRoute) {
+    this.route.data
+      .pipe(
+        map(data => data.workingDay)
+      )
+      .subscribe(
+        (workingDay: WorkingDay) => this.workingDay = workingDay
+      );
   }
 
 }
