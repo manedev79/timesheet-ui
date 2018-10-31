@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { WorkingDaySummary } from '../../model/working-day-summary.model';
 import { TimeCellRendererComponent } from './time-cell-renderer/time-cell-renderer.component';
 import { DateCellRendererComponent } from './date-cell-renderer/date-cell-renderer.component';
+import { DurationCellRendererComponent } from './duration-cell-renderer/duration-cell-renderer.component';
 
 @Component({
   selector: 'app-workingday-list',
@@ -24,7 +25,9 @@ export class WorkingDayListComponent implements OnChanges, AfterViewInit {
     enableColResize: true, // columns can be resized
     enableSorting: true, // enable sorting
     animateRows: true, // animate the sorting
-
+    localeText: {
+      noRowsToShow: 'Keine Einträge gefunden.'
+    },
     onFirstDataRendered: () => {
       // Use complete page size
       this.fitGridToSize();
@@ -54,17 +57,19 @@ export class WorkingDayListComponent implements OnChanges, AfterViewInit {
       headerName: 'Bis',
       field: 'end',
       maxWidth: 100,
-      cellRendererFramework: TimeCellRendererComponent,
+      cellRendererFramework: TimeCellRendererComponent
     },
     {
       headerName: 'Arbeitszeit',
-      field: 'workSum',
-      maxWidth: 130
+      field: 'totalWork',
+      maxWidth: 130,
+      cellRendererFramework: DurationCellRendererComponent
     },
     {
       headerName: 'Pausensumme',
-      field: 'breakSum',
-      maxWidth: 130
+      field: 'totalBreak',
+      maxWidth: 130,
+      cellRendererFramework: DurationCellRendererComponent
     },
     {
       headerName: 'Beschreibung',

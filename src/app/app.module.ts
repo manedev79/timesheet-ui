@@ -25,6 +25,7 @@ import { DateCellRendererComponent } from './view/working-day-list/date-cell-ren
 import { YearSelectorComponent } from './view/year-selector/year-selector.component';
 import { MonthSelectorComponent } from './view/month-selector/month-selector.component';
 import { MonthDatePipe } from './view/month-pipe/month-pipe.pipe';
+import { DurationCellRendererComponent } from './view/working-day-list/duration-cell-renderer/duration-cell-renderer.component';
 
 moment.locale('de');
 registerLocaleData(localeDe, 'de');
@@ -43,7 +44,8 @@ registerLocaleData(localeDe, 'de');
     DateCellRendererComponent,
     YearSelectorComponent,
     MonthSelectorComponent,
-    MonthDatePipe
+    MonthDatePipe,
+    DurationCellRendererComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ registerLocaleData(localeDe, 'de');
     HttpClientModule,
     AgGridModule.withComponents([
       TimeCellRendererComponent,
-      DateCellRendererComponent
+      DateCellRendererComponent,
+      DurationCellRendererComponent
     ])
   ],
   providers: [
