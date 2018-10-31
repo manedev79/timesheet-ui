@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 import { WorkingDayService } from '../../services/working-day.service';
 import { WorkingDay } from '../../model/working-day.model';
-import { Break } from 'src/app/model/break.model';
+import { Break } from '../../model/break.model';
 
 @Component({
   selector: 'app-workingday-input',
@@ -28,11 +28,13 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
     const day = this.workingDay ? this.formatDate(moment(this.workingDay.day, 'YYYY-MM-DD')) : this.formatDate(moment());
     const start = this.workingDay ? this.formatTime(moment(this.workingDay.start)) : '';
     const end = this.workingDay ? this.formatTime(moment(this.workingDay.end)) : '';
+    const description = this.workingDay ? this.workingDay.description : '';
 
     this.form = this.fb.group({
       'day': this.fb.control(day),
       'start': this.fb.control(start),
       'end': this.fb.control(end),
+      'description': this.fb.control(description),
       'breaks': this.fb.control('')
     });
   }

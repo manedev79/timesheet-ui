@@ -6,5 +6,7 @@ export interface WorkingDay {
   start: string;
   end: string;
 
+  description: string;
+
   breaks: Break[];
 }
