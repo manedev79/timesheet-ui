@@ -52,17 +52,12 @@ export class WorkingDayService {
     const url = `${environment.baseUrl}/monthlytimesheets/`;
     return this.http.get<WorkingDaySummary[]>(url, {
       params: {
-        yearMonth: this.getYearMonthAsIso8601(year, month)
+        yearMonth: moment().set({
+          year: year,
+          month: month
+        }).format('YYYY-MM')
       }
     });
-  }
-
-  private getYearMonthAsIso8601(year: number, month: number): string {
-    return `${year}-${month.toString().padStart(2, '0')}`;
-  }
-
-  private getYearMonthDayAsIso8601(year: number, month: number, day: number): string {
-    return `${this.getYearMonthAsIso8601(year, month)}-${day.toString().padStart(2, '0')}`;
   }
 
 }

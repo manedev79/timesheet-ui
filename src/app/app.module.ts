@@ -7,6 +7,7 @@ import localeDe from '@angular/common/locales/de';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
+import * as moment from 'moment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +22,11 @@ import { EditPageComponent } from './edit/edit-page/edit-page.component';
 import { WorkingDayResolver } from './edit/workingday-resolver/workingday.resolver';
 import { TimeCellRendererComponent } from './view/working-day-list/time-cell-renderer/time-cell-renderer.component';
 import { DateCellRendererComponent } from './view/working-day-list/date-cell-renderer/date-cell-renderer.component';
+import { YearSelectorComponent } from './view/year-selector/year-selector.component';
+import { MonthSelectorComponent } from './view/month-selector/month-selector.component';
+import { MonthDatePipe } from './view/month-pipe/month-pipe.pipe';
 
+moment.locale('de');
 registerLocaleData(localeDe, 'de');
 
 @NgModule({
@@ -35,7 +40,10 @@ registerLocaleData(localeDe, 'de');
     HeaderComponent,
     EditPageComponent,
     TimeCellRendererComponent,
-    DateCellRendererComponent
+    DateCellRendererComponent,
+    YearSelectorComponent,
+    MonthSelectorComponent,
+    MonthDatePipe
   ],
   imports: [
     BrowserModule,

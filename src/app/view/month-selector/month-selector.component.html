@@ -1,0 +1,13 @@
+<div class="btn-group btn-link btn-icon btn-sm">
+  <button class="btn" (click)="decrease()">
+    <clr-icon shape="caret" style="transform: rotate(270deg);"></clr-icon>
+  </button>
+
+  <button class="btn month">
+    {{ monthNumber | monthDate }}
+  </button>
+
+  <button class="btn" (click)="increase()">
+    <clr-icon shape="caret" style="transform: rotate(90deg);"></clr-icon>
+  </button>
+</div>

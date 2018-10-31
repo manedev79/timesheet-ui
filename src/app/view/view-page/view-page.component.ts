@@ -13,18 +13,26 @@ export class ViewPageComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   workingDaySummaries: WorkingDaySummary[] = [];
+  year = 2012;
+  month = 5;
 
   constructor(private workingDayService: WorkingDayService) {}
 
   ngOnInit() {
-    // Load days for current year and month
-    // const currentDate = moment(); // TODO
-    const currentDate = moment({year: 2012, month: 6});
+    this.loadData(this.year, this.month);
+  }
+
+  private loadData(year: number, month: number) {
+    const currentDate = moment({year, month});
     this.subscription = this.workingDayService
       .getWorkingDaysForYearMonth(currentDate.year(), currentDate.month())
       .subscribe((workingDaySummary: WorkingDaySummary[]) => {
         this.workingDaySummaries = workingDaySummary;
       });
+  }
+
+  onChange() {
+    this.loadData(this.year, this.month);
   }
 
   ngOnDestroy() {
