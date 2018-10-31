@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WorkingDayService } from 'src/app/services/working-day.service';
 import { Subscription } from 'rxjs';
 import { WorkingDaySummary } from 'src/app/model/working-day-summary.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-view-page',
@@ -17,9 +18,10 @@ export class ViewPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Load days for current year and month
-    const currentDate = new Date();
+    // const currentDate = moment(); // TODO
+    const currentDate = moment({year: 2012, month: 6});
     this.subscription = this.workingDayService
-      .getWorkingDaysForYearMonth(currentDate.getUTCFullYear(), currentDate.getUTCMonth() + 1)
+      .getWorkingDaysForYearMonth(currentDate.year(), currentDate.month())
       .subscribe((workingDaySummary: WorkingDaySummary[]) => {
         this.workingDaySummaries = workingDaySummary;
       });

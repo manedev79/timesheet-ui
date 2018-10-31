@@ -2,6 +2,8 @@ import { Component, ViewChild, Input, OnChanges, SimpleChanges, AfterViewInit} f
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions } from 'ag-grid-community';
 import { WorkingDaySummary } from '../../model/working-day-summary.model';
+import { TimeCellRendererComponent } from './time-cell-renderer/time-cell-renderer.component';
+import { DateCellRendererComponent } from './date-cell-renderer/date-cell-renderer.component';
 
 @Component({
   selector: 'app-workingday-list',
@@ -30,17 +32,20 @@ export class WorkingDayListComponent implements OnChanges, AfterViewInit {
     {
       headerName: 'Tag',
       field: 'day',
-      maxWidth: 100
+      maxWidth: 100,
+      cellRendererFramework: DateCellRendererComponent
     },
     {
       headerName: 'Von',
       field: 'start',
-      maxWidth: 100
+      maxWidth: 100,
+      cellRendererFramework: TimeCellRendererComponent
     },
     {
       headerName: 'Bis',
       field: 'end',
-      maxWidth: 100
+      maxWidth: 100,
+      cellRendererFramework: TimeCellRendererComponent,
     },
     {
       headerName: 'Arbeitszeit',

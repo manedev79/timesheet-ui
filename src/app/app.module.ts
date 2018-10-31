@@ -19,6 +19,8 @@ import { CreatePageComponent } from './create/create-page/create.component';
 import { HeaderComponent } from './header/header.component';
 import { EditPageComponent } from './edit/edit-page/edit-page.component';
 import { WorkingDayResolver } from './edit/workingday-resolver/workingday.resolver';
+import { TimeCellRendererComponent } from './view/working-day-list/time-cell-renderer/time-cell-renderer.component';
+import { DateCellRendererComponent } from './view/working-day-list/date-cell-renderer/date-cell-renderer.component';
 
 registerLocaleData(localeDe, 'de');
 
@@ -31,7 +33,9 @@ registerLocaleData(localeDe, 'de');
     ViewPageComponent,
     CreatePageComponent,
     HeaderComponent,
-    EditPageComponent
+    EditPageComponent,
+    TimeCellRendererComponent,
+    DateCellRendererComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,10 @@ registerLocaleData(localeDe, 'de');
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([
+      TimeCellRendererComponent,
+      DateCellRendererComponent
+    ])
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
