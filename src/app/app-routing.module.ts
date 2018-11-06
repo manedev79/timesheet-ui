@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewPageComponent } from './view/view-page/view-page.component';
-import { CreatePageComponent } from './create/create-page/create.component';
+import { CreatePageComponent } from './create/create-page/create-page.component';
 import { EditPageComponent } from './edit/edit-page/edit-page.component';
 import { WorkingDayResolver } from './edit/workingday-resolver/workingday.resolver';
 

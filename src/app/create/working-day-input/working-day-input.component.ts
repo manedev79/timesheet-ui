@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import * as moment from 'moment';
 
 import { WorkingDayService } from '../../services/working-day.service';
@@ -35,8 +35,29 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
       'start': this.fb.control(start),
       'end': this.fb.control(end),
       'description': this.fb.control(description),
-      'breaks': this.fb.control('')
+      'breaks': this.fb.array(this.initBreaks())
     });
+  }
+
+  private initBreaks() {
+    // TODO load existing
+    return [ this.emptyBreak() ];
+  }
+
+  private emptyBreak() {
+    return this.break(null, null, null);
+   }
+
+  private break(start: string, end: string, duration: string) {
+   return this.fb.control({ start, end, duration });
+  }
+
+  private getBreaks(): FormArray {
+    return <FormArray>this.form.controls['breaks'];
+  }
+
+  addBreak() {
+    this.getBreaks().push(this.emptyBreak());
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,12 +75,9 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
   submit() {
     const { day, start, end, breaks } = this.form.value;
     const id = this.workingDay ? this.workingDay.id : null;
-    let workingDay = <WorkingDay> {
-      id,
+    let workingDay = <Partial<WorkingDay>> {
+      id: id,
       day: this.parseDate(day).toISOString(),
-      start: null,
-      end: null,
-      breaks: []
     };
 
     // Start set?
@@ -86,11 +104,9 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
       };
     }
 
-    // TODO handle breaks
-
     console.log('Sending workingDay', workingDay);
     this.workingDayService
-      .saveWorkingDay(workingDay)
+      .saveWorkingDay(workingDay as WorkingDay)
       .subscribe(
         (result: WorkingDay) => { alert('SAVED!' + result); },
         err => {
@@ -100,15 +116,14 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
       );
   }
 
-  private convertBreaks(day: string, breaks): Break[] {
-    // TODO Currently only one break is supported
-    const breakModel = <Break> {
-      start: this.buildMoment(day, breaks.start).toISOString(),
-      end: this.buildMoment(day, breaks.end).toISOString(),
-      duration: breaks.duration as string
-    };
-
-    return [breakModel];
+  private convertBreaks(day: string, breaks: Break[]): Break[] {
+    return breaks
+      .map(b => ({ // convert all breaks with the given day
+        start: b.start ? this.buildMoment(day, b.start).toISOString() : null,
+        end: b.end ? this.buildMoment(day, b.end).toISOString() : null,
+        duration: b.duration as string
+      }))
+      .filter(b => (b.start || b.end || b.duration)); // filter out all empty breaks
   }
 
   private parseDate(date: string): moment.Moment {

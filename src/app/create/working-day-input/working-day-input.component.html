@@ -46,7 +46,13 @@
     <div class="clr-form-control">
       <label for="breaks" class="clr-control-label">Pausen:</label>
       <div class="clr-control-container">
-        <app-break-input formControlName="breaks"></app-break-input>
+        <ng-container *ngFor="let entry of form.controls['breaks'].controls; let i=index" formArrayName="breaks">
+          <app-break-input class="break" [formControlName]="i"></app-break-input>
+        </ng-container>
+
+        <button class="btn btn-icon btn-sm" type="button" (click)="addBreak()">
+          <clr-icon shape="plus"></clr-icon>
+        </button>
       </div>
     </div>
 
