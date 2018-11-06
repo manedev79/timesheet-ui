@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, AfterViewInit, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -11,7 +11,7 @@ import { Break } from '../../model/break.model';
   templateUrl: './working-day-input.component.html',
   styleUrls: ['./working-day-input.component.scss']
 })
-export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
+export class WorkingDayInputComponent implements OnInit, AfterViewInit, OnChanges {
   form: FormGroup;
 
   @Input()
@@ -20,7 +20,9 @@ export class WorkingDayInputComponent implements AfterViewInit, OnChanges {
   @ViewChild('select', { read: ViewContainerRef })
   private select: ViewContainerRef;
 
-  constructor(private fb: FormBuilder, private workingDayService: WorkingDayService) {
+  constructor(private fb: FormBuilder, private workingDayService: WorkingDayService) {}
+
+  ngOnInit(): void {
     this.initalizeFields();
   }
 
