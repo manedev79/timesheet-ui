@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 import { environment } from 'src/environments/environment';
 import { WorkingDay } from '../model/working-day.model';
@@ -23,14 +24,26 @@ export class WorkingDayService {
 
   saveWorkingDay(workingDay: WorkingDay): Observable<WorkingDay> {
     const url = `${environment.baseUrl}/workingdays/`;
-    return this.http.post<WorkingDay>(url, workingDay);
+
+    if (workingDay.id) {
+      return this.http.put<WorkingDay>(url, workingDay);
+    } else {
+      return this.http.post<WorkingDay>(url, workingDay);
+    }
   }
 
   getWorkingDayByDay(year: number, month: number, day: number): Observable<WorkingDay> {
     const url = `${environment.baseUrl}/workingdays/`;
+
+    const momDay = moment().set({
+      year,
+      month,
+      date: day
+    }).utc(true);
+
     return this.http.get<WorkingDay>(url, {
       params: {
-        day: this.getYearMonthDayAsIso8601(year, month, day)
+        day: momDay.format('YYYY-MM-DD')
       }
     });
   }
@@ -39,17 +52,12 @@ export class WorkingDayService {
     const url = `${environment.baseUrl}/monthlytimesheets/`;
     return this.http.get<WorkingDaySummary[]>(url, {
       params: {
-        yearMonth: this.getYearMonthAsIso8601(year, month)
+        yearMonth: moment().set({
+          year: year,
+          month: month
+        }).format('YYYY-MM')
       }
     });
-  }
-
-  private getYearMonthAsIso8601(year: number, month: number): string {
-    return `${year}-${month.toString().padStart(2, '0')}`;
-  }
-
-  private getYearMonthDayAsIso8601(year: number, month: number, day: number): string {
-    return `${this.getYearMonthAsIso8601(year, month)}-${day.toString().padStart(2, '0')}`;
   }
 
 }

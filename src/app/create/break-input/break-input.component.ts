@@ -1,5 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import * as moment from 'moment';
 import { Break } from '../../model/break.model';
 
 @Component({
@@ -17,20 +18,53 @@ import { Break } from '../../model/break.model';
 export class BreakInputComponent implements ControlValueAccessor {
   start: string;
   end: string;
-  duration: string;
+  durationInMin: number;
 
   propagateChange = (_: any) => {};
 
   onAnyChange(event): void {
-    this.propagateChange({
-      start: this.start,
-      end: this.end,
-      duration: this.duration
-    } as Break);
+    this.notifyAboutCurrentValues();
   }
 
-  writeValue(obj: any): void {
-    // TODO currently we only read data
+  writeValue(obj: Break): void {
+    if (!obj) {
+      return;
+    }
+
+    if (obj.start) {
+      this.start = this.extractTime(obj.start);
+    }
+
+    if (obj.end) {
+      this.end = this.extractTime(obj.end);
+    }
+
+    if (obj.duration) {
+      this.durationInMin = moment.duration(obj.duration).asMinutes();
+    }
+
+    setTimeout(() => this.notifyAboutCurrentValues()); // WHY ANGULAR, WHY?
+  }
+
+  private extractTime(input: string): string {
+    return moment(input).format('HH:mm');
+  }
+
+  private notifyAboutCurrentValues() {
+    let result = {
+      start: this.start,
+      end: this.end,
+      duration: null
+    };
+
+    if (this.durationInMin) {
+      result = {
+        ...result,
+        duration: moment.duration(`PT${this.durationInMin}M`).toISOString()
+      };
+    }
+
+    this.propagateChange(result);
   }
 
   registerOnChange(fn: any): void {
@@ -38,5 +72,4 @@ export class BreakInputComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {}
-
 }

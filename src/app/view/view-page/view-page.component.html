@@ -1,4 +1,9 @@
 <div class="view-page">
+  <div class="date-selector">
+    <year-selector [(ngModel)]="year" (ngModelChange)="onChange()"></year-selector>
+    <month-selector [(ngModel)]="month" (ngModelChange)="onChange()"></month-selector>
+  </div>
+
   <app-workingday-list
     [rowData]="workingDaySummaries"
   ></app-workingday-list>
