@@ -1,7 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as moment from 'moment';
-
+import { Break } from '../../model/break.model';
 
 @Component({
   selector: 'app-break-input',
@@ -26,7 +26,31 @@ export class BreakInputComponent implements ControlValueAccessor {
     this.notifyAboutCurrentValues();
   }
 
-  notifyAboutCurrentValues() {
+  writeValue(obj: Break): void {
+    if (!obj) {
+      return;
+    }
+
+    if (obj.start) {
+      this.start = this.extractTime(obj.start);
+    }
+
+    if (obj.end) {
+      this.end = this.extractTime(obj.end);
+    }
+
+    if (obj.duration) {
+      this.durationInMin = moment.duration(obj.duration).asMinutes();
+    }
+
+    setTimeout(() => this.notifyAboutCurrentValues()); // WHY ANGULAR, WHY?
+  }
+
+  private extractTime(input: string): string {
+    return moment(input).format('HH:mm');
+  }
+
+  private notifyAboutCurrentValues() {
     let result = {
       start: this.start,
       end: this.end,
@@ -41,10 +65,6 @@ export class BreakInputComponent implements ControlValueAccessor {
     }
 
     this.propagateChange(result);
-  }
-
-  writeValue(obj: any): void {
-    // TODO currently we only read data
   }
 
   registerOnChange(fn: any): void {
