@@ -63,13 +63,19 @@ export class WorkingDayListComponent implements OnChanges, AfterViewInit {
       headerName: 'Arbeitszeit',
       field: 'totalWork',
       maxWidth: 130,
-      cellRendererFramework: DurationCellRendererComponent
+      cellRendererFramework: DurationCellRendererComponent,
+      cellRendererParams: {
+        format: 'HH:mm'
+      }
     },
     {
       headerName: 'Pausensumme',
       field: 'totalBreak',
       maxWidth: 130,
-      cellRendererFramework: DurationCellRendererComponent
+      cellRendererFramework: DurationCellRendererComponent,
+      cellRendererParams: {
+        format: 'HH:mm'
+      }
     },
     {
       headerName: 'Beschreibung',
