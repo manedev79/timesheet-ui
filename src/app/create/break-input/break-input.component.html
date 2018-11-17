@@ -6,7 +6,7 @@
     type="time"
     clrInput
     [(ngModel)]="start"
-    (input)="onAnyChange($event)"
+    (input)="onStartChange($event)"
   />
   <span>-</span>
   <input
@@ -15,7 +15,7 @@
     type="time"
     clrInput
     [(ngModel)]="end"
-    (input)="onAnyChange($event)"
+    (input)="onEndChange($event)"
   />
   <span>/</span>
   <input
@@ -24,7 +24,7 @@
     type="number"
     clrInput
     [(ngModel)]="durationInMin"
-    (input)="onAnyChange($event)"
+    (input)="onDurationChange($event)"
   />
   <span>Min</span>
 </div>
