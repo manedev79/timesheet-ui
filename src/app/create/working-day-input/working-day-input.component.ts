@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef, AfterViewInit, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 
 import { WorkingDayService } from '../../services/working-day.service';
@@ -60,7 +60,15 @@ export class WorkingDayInputComponent implements OnInit, AfterViewInit, OnChange
   }
 
   private break(id: string, start: string, end: string, duration: string): FormControl {
-   return this.fb.control({ id, start, end, duration });
+   return this.fb.control({ id, start, end, duration }, [ this.breakValidator() ]);
+  }
+
+  private breakValidator(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const { start, end } = control.value;
+      const isEndBeforeStart = this.parseTime(end).isBefore(this.parseTime(start));
+      return isEndBeforeStart ? { endBeforeStart: true } : null;
+    };
   }
 
   private getBreaks(): FormArray {

@@ -46,9 +46,10 @@
     <div class="clr-form-control">
       <label for="breaks" class="clr-control-label">Pausen:</label>
       <div class="clr-control-container">
-        <ng-container *ngFor="let entry of form.controls['breaks'].controls; let i=index" formArrayName="breaks">
-          <app-break-input class="break" [formControlName]="i"></app-break-input>
-        </ng-container>
+        <div class="break" *ngFor="let entry of form.controls['breaks'].controls; let i=index" formArrayName="breaks">
+          <app-break-input [formControlName]="i"></app-break-input>
+          <span *ngIf="form.controls['breaks'].controls[i].errors?.endBeforeStart" class="input-error">Das Ende darf nicht vor dem Start liegen.</span>
+        </div>
 
         <button class="btn btn-icon btn-sm" type="button" (click)="addBreak()">
           <clr-icon shape="plus"></clr-icon>
@@ -58,7 +59,7 @@
 
     <!-- Speichern -->
     <div class="clr-form-control">
-      <button class="btn btn-primary" type="submit" (click)="submit()">Speichern</button>
+      <button class="btn btn-primary" type="submit" (click)="submit()" [disabled]="form.invalid">Speichern</button>
     </div>
   </form>
 </div>
