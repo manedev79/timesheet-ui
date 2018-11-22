@@ -1,3 +1,18 @@
+.view-page {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "selection" "table";
+}
+
 .date-selector {
   margin: 5px;
+  grid-area: "selection";
+}
+
+.workingday-list {
+  grid-area: "table";
+  margin-top: 10px;
 }

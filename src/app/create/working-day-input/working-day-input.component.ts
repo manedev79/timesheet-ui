@@ -96,12 +96,13 @@ export class WorkingDayInputComponent implements OnInit, AfterViewInit, OnChange
   }
 
   submit() {
-    const { day, start, end, breaks } = this.form.value;
+    const { day, start, end, breaks, description } = this.form.value;
     const id = this.workingDay ? this.workingDay.id : null;
 
     let workingDay = <Partial<WorkingDay>> {
       id: id,
       day: this.parseDate(day).toISOString(),
+      description: description
     };
 
     // Start set?
