@@ -4,7 +4,9 @@
     <month-selector [(ngModel)]="month" (ngModelChange)="onChange()"></month-selector>
   </div>
 
-  <app-workingday-list
-    [rowData]="workingDaySummaries"
-  ></app-workingday-list>
+  <div class="workingday-list">
+    <app-workingday-list
+      [rowData]="workingDaySummaries"
+    ></app-workingday-list>
+  </div>
 </div>
