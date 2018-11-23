@@ -20,72 +20,47 @@ export class BreakInputComponent implements ControlValueAccessor {
   end: string;
   durationInMin: number;
 
+  // Disabled states
+  timeDisabled = false;
+  durationDisabled = false;
+
   propagateChange = (_: any) => {};
 
   onStartChange(event): void {
     if (!this.isValidTime(this.start)) {
+      this.durationDisabled = false;
       return;
     }
 
-    if (this.isValidTime(this.end)) {
-      // Start + End given -> update Duration
-      this.durationInMin = this.calcDiffInMinutes(this.start, this.end);
-    } else if (this.isValidDuration(this.durationInMin)) {
-      // Start + Duration given -> update End
-      this.end = this.addMinutesToTime(this.start, this.durationInMin);
-    }
+    this.durationInMin = null;
+    this.durationDisabled = true;
 
     this.notifyAboutCurrentValues();
   }
 
   onEndChange(event): void {
     if (!this.isValidTime(this.end)) {
+      this.durationDisabled = false;
       return;
     }
 
-    if (this.isValidTime(this.start)) {
-      // End + Start given -> update Duration
-      this.durationInMin = this.calcDiffInMinutes(this.start, this.end);
-    } else if (this.isValidDuration(this.durationInMin)) {
-      // End + Duration given -> update Start
-      this.start = this.subtractMinutesToTime(this.end, this.durationInMin);
-    }
-
+    this.durationInMin = null;
+    this.durationDisabled = true;
     this.notifyAboutCurrentValues();
   }
 
   onDurationChange(event): void {
     if (!this.isValidDuration(this.durationInMin)) {
+      this.timeDisabled = false;
       return;
     }
 
-    if (this.isValidTime(this.start)) {
-      // Duration + Start given -> update End
-      this.end = this.addMinutesToTime(this.start, this.durationInMin);
-    } else if (this.isValidTime(this.end)) {
-      // Duration + End given -> update Start
-      this.start = this.subtractMinutesToTime(this.end, this.durationInMin);
-    }
+    // Deactivate time
+    this.start = null;
+    this.end = null;
+    this.timeDisabled = true;
 
     this.notifyAboutCurrentValues();
-  }
-
-  private addMinutesToTime(time: string, minutes: number): string {
-    return this.parseTime(time).add(minutes, 'minutes').format('HH:mm');
-  }
-
-  private subtractMinutesToTime(time: string, minutes: number): string {
-    return this.parseTime(time).subtract(minutes, 'minutes').format('HH:mm');
-  }
-
-  private calcDiffInMinutes(startTime: string, endTime: string): number {
-    const start = this.parseTime(startTime);
-    const end = this.parseTime(endTime);
-    return Math.abs(start.diff(end, 'minutes'));
-  }
-
-  private parseTime(time: string): moment.Moment {
-    return moment(time, 'HH:mm');
   }
 
   private isValidDuration(input: any) {
