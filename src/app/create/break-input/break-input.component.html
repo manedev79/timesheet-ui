@@ -3,7 +3,6 @@
     placeholder="Von"
     class="input-small"
     type="time"
-    clrInput
     [(ngModel)]="start"
     (input)="onStartChange($event)"
     [disabled]="timeDisabled"
@@ -13,7 +12,6 @@
     placeholder="Bis"
     class="input-small"
     type="time"
-    clrInput
     [(ngModel)]="end"
     (input)="onEndChange($event)"
     [disabled]="timeDisabled"
@@ -23,7 +21,6 @@
     placeholder=""
     class="input-small"
     type="number"
-    clrInput
     [(ngModel)]="durationInMin"
     (input)="onDurationChange($event)"
     [disabled]="durationDisabled"
