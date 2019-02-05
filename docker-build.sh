@@ -1,1 +1,1 @@
-docker build -t manedev79/timesheet-ui .
+docker build -t com.github.manedev79/timesheet-ui .
