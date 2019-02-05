@@ -1,0 +1,15 @@
+version: '3'
+
+services: 
+  timesheet-backend:
+    image: com.github.manedev79/timesheet
+    ports:
+      - "8080:8080"
+
+  timesheet-ui:
+    image: com.github.manedev79/timesheet-ui
+    ports:
+      - "80:80"
+    depends_on: 
+      - timesheet-backend
+

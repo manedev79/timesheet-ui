@@ -15,12 +15,12 @@ export class ViewPageComponent implements OnInit, OnDestroy {
 
   workingDaySummaries: WorkingDaySummary[] = [];
 
-  // TODO activate after testing
-  // year = moment().year();
-  // month = moment().month();
+  year = moment().year();
+  month = moment().month();
 
-  year = 2012;
-  month = 5;
+  // TODO activate for testing
+  // year = 2012;
+  // month = 5;
 
   constructor(private workingDayService: WorkingDayService) {}
 
