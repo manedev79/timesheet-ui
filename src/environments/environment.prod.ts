@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://timesheet-backend:8080/'
+  baseUrl: 'http://localhost/timesheet-backend/'
 };

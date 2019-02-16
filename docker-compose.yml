@@ -1,15 +1,25 @@
 version: '3'
 
-services: 
+services:
+  timesheet-entry:
+    image: nginx:latest
+    volumes:
+      - ./nginx/application.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - timesheet-backend
+      - timesheet-ui
+
   timesheet-backend:
     image: manedev79/timesheet
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
 
   timesheet-ui:
     image: manedev79/timesheet-ui
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     depends_on: 
       - timesheet-backend
 
