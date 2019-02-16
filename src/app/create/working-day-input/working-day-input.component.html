@@ -1,23 +1,23 @@
 
 <div class="workingday-wrapper">
-  <form class="clr-form" [formGroup]="form" clrForm>
+  <form class="clr-form clr-form-vertical" [formGroup]="form">
 
-    <!-- Arbeitstag -->
+    <!-- Workingday -->
     <div class="clr-form-control">
       <label for="day" class="clr-control-label">Arbeitstag:</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper">
-          <input #select type="date" id="day" clrDate formControlName="day">
+          <input #select id="day" type="date" formControlName="day" clrDate>
         </div>
       </div>
     </div>
 
-    <!-- Von -->
+    <!-- Start -->
     <div class="clr-form-control">
       <label for="start" class="clr-control-label">Von:</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper">
-          <input type="time" id="start" clrInput formControlName="start">
+          <input id="start" type="time" formControlName="start">
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <label for="end" class="clr-control-label">Bis:</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper">
-          <input type="time" id="end" clrInput formControlName="end">
+          <input id="end" type="time" formControlName="end">
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <label for="description" class="clr-control-label">Beschreibung:</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper">
-          <input type="text" id="description" clrInput formControlName="description">
+          <input id="description" type="text" formControlName="description">
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <!-- Speichern -->
+    <!-- Save -->
     <div class="clr-form-control">
       <button class="btn btn-primary" type="submit" (click)="submit()" [disabled]="form.invalid">Speichern</button>
     </div>
