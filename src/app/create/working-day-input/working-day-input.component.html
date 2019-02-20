@@ -46,7 +46,7 @@
     <div class="clr-form-control">
       <label for="breaks" class="clr-control-label">Pausen:</label>
       <div class="clr-control-container">
-        <div class="break" *ngFor="let entry of form.controls['breaks'].controls; let i=index" formArrayName="breaks">
+        <div class="break" *ngFor="let entry of form.controls['breaks']['controls']; let i=index" formArrayName="breaks">
           <app-break-input [formControlName]="i"></app-break-input>
           <span *ngIf="form.controls['breaks'].controls[i].errors?.endBeforeStart" class="input-error">Das Ende darf nicht vor dem Start liegen.</span>
         </div>
