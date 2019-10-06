@@ -1,4 +1,5 @@
-# Timesheet
+![](https://api.travis-ci.com/manedev79/timesheet-ui.svg?branch=master)
+# Timesheet 
 
 ## Development server
 
