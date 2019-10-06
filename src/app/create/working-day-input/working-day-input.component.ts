@@ -17,7 +17,7 @@ export class WorkingDayInputComponent implements OnInit, AfterViewInit, OnChange
   @Input()
   workingDay: WorkingDay = null;
 
-  @ViewChild('select', { read: ViewContainerRef })
+  @ViewChild('select', { read: ViewContainerRef, static: true })
   private select: ViewContainerRef;
 
   constructor(private fb: FormBuilder, private workingDayService: WorkingDayService) {}

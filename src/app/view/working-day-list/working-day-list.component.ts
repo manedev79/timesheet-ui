@@ -15,7 +15,7 @@ import { DurationCellRendererComponent } from './duration-cell-renderer/duration
   styleUrls: ['./working-day-list.component.scss']
 })
 export class WorkingDayListComponent implements OnChanges, AfterViewInit {
-  @ViewChild('grid')
+  @ViewChild('grid', { static: true })
   private grid: AgGridNg2;
 
   @Input()
