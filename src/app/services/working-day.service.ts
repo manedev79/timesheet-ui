@@ -5,41 +5,30 @@ import * as moment from 'moment';
 
 import { environment } from 'src/environments/environment';
 import { WorkingDay } from '../model/working-day.model';
-import { WorkingDaySummary } from '../model/working-day-summary.model';
+import { Timesheet } from '../model/timesheet';
 
 @Injectable()
 export class WorkingDayService {
 
   constructor(private http: HttpClient) {}
 
-  getWorkingDays(): Observable<WorkingDay[]> {
-    const url = `${environment.baseUrl}/workingdays`;
-    return this.http.get<WorkingDay[]>(url);
-  }
-
-  getWorkingDay(workingDayId: number): Observable<WorkingDay> {
-    const url = `${environment.baseUrl}/workingdays/${workingDayId}`;
-    return this.http.get<WorkingDay>(url);
-  }
-
   saveWorkingDay(workingDay: WorkingDay): Observable<WorkingDay> {
-    const url = `${environment.baseUrl}/workingdays/`;
 
-    if (workingDay.id) {
-      return this.http.put<WorkingDay>(url, workingDay);
-    } else {
-      return this.http.post<WorkingDay>(url, workingDay);
-    }
+    const momDay = moment(workingDay.day, moment.ISO_8601, true);
+    const month = momDay.format('YYYY-MM');
+    const url = `${environment.baseUrl}/timesheet/${month}/workingday`;
+
+    return this.http.post<WorkingDay>(url, workingDay);
   }
 
   getWorkingDayByDay(year: number, month: number, day: number): Observable<WorkingDay> {
-    const url = `${environment.baseUrl}/workingdays/`;
-
     const momDay = moment().set({
       year,
       month,
       date: day
     }).utc(true);
+
+    const url = `${environment.baseUrl}/timesheet/${momDay.format('YYYY-MM')}/workingDay/${momDay.format('MM-DD')}`;
 
     return this.http.get<WorkingDay>(url, {
       params: {
@@ -48,16 +37,13 @@ export class WorkingDayService {
     });
   }
 
-  getWorkingDaysForYearMonth(year: number, month: number): Observable<WorkingDaySummary[]> {
-    const url = `${environment.baseUrl}/monthlytimesheets/`;
-    return this.http.get<WorkingDaySummary[]>(url, {
-      params: {
-        yearMonth: moment().set({
-          year: year,
-          month: month
-        }).format('YYYY-MM')
-      }
-    });
+  getWorkingDaysForYearMonth(year: number, month: number): Observable<Timesheet> {
+    const yearMonth = moment().set({
+      year: year,
+      month: month
+    }).format('YYYY-MM');
+    const url = `${environment.baseUrl}/timesheet/${yearMonth}`;
+    return this.http.get<Timesheet>(url, {});
   }
 
 }

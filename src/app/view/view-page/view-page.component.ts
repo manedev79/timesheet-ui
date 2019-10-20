@@ -4,6 +4,7 @@ import * as moment from 'moment';
 
 import { WorkingDayService } from '../../services/working-day.service';
 import { WorkingDaySummary } from '../../model/working-day-summary.model';
+import { Timesheet } from 'src/app/model/timesheet';
 
 @Component({
   selector: 'app-view-page',
@@ -35,8 +36,8 @@ export class ViewPageComponent implements OnInit, OnDestroy {
   private loadData(year: number, month: number) {
     this.subscription = this.workingDayService
       .getWorkingDaysForYearMonth(year, month)
-      .subscribe((workingDaySummary: WorkingDaySummary[]) => {
-        this.workingDaySummaries = workingDaySummary;
+      .subscribe((timesheet: Timesheet) => {
+        this.workingDaySummaries = timesheet.workingDays;
       });
   }
 
