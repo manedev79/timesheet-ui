@@ -27,7 +27,7 @@
     "ag-grid-angular": "~19.1.2",
     "ag-grid-community": "~19.1.4",
     "core-js": "~2.6.0",
-    "moment": "~2.22.2",
+    "moment": "~2.29.4",
     "rxjs": "~6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
